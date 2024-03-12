@@ -26,22 +26,12 @@ class FileStorage:
         """ returns the path of the json file """
         return FileStorage.__file_path
 
-    #def new(self, obj):
-     #   string = f"{obj.__class__.__name__}.{obj.id}"
-      #  self.__objects = {string:obj.to_dict()}
     def save(self):
         """ serializes __objects to the JSON file (path: __file_path)"""
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as f:
             towrite = {obj: FileStorage.__objects[obj].to_dict()
                        for obj in FileStorage.__objects.keys()}
             json.dump(towrite, f)
-    #def save(self):
-     #   with open(self.__file_path, "w") as file:
-      #      file.write(json.dumps(self.__objects))
-    #def reload(self):
-     #   if os.path.exists(self.__file_path):
-      #      with open(self.__file_path, "r") as file:
-       #         self.__objects = json.loads(file.read())
     def reload(self):
         """
             deserializes the JSON file to __objects
